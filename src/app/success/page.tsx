@@ -1,0 +1,1 @@
+import Link from 'next/link';export default function Success(){return <div className="container page-head"><span className="eyebrow">Checkout return</span><h1>Thank you.</h1><p>If payment succeeded, your order will be recorded after the verified payment webhook arrives. This page alone is not proof of payment.</p><Link className="btn" href="/">Return home</Link></div>}

@@ -1,0 +1,2 @@
+import argon2 from 'argon2';import {createInterface} from 'node:readline/promises';
+const rl=createInterface({input:process.stdin,output:process.stdout});const password=await rl.question('Enter strong owner password (input visible): ');rl.close();if(password.length<16)throw new Error('Use at least 16 characters');console.log('OWNER_PASSWORD_HASH='+await argon2.hash(password,{type:argon2.argon2id}));

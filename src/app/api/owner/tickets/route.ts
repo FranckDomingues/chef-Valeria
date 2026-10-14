@@ -1,0 +1,3 @@
+import {NextResponse} from 'next/server';import {isOwner,sameOrigin} from '@/lib/auth';import db from '@/adapters/database';import {z} from 'zod';
+const schema=z.object({subject:z.string().trim().min(3).max(160),customer:z.string().trim().min(2).max(120)});
+export async function POST(req:Request){if(!await isOwner())return NextResponse.json({error:'Unauthorized'},{status:401});if(!sameOrigin(req))return NextResponse.json({error:'Invalid origin'},{status:403});const parsed=schema.safeParse(await req.json().catch(()=>null));if(!parsed.success)return NextResponse.json({error:'Invalid input'},{status:400});db.prepare('INSERT INTO tickets(subject,customer) VALUES(?,?)').run(parsed.data.subject,parsed.data.customer);return NextResponse.json({ok:true},{status:201})}

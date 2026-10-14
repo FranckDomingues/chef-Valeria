@@ -1,0 +1,1 @@
+"use client";import {useRouter} from 'next/navigation';export function Logout(){const router=useRouter();return <button className="mini-btn" onClick={async()=>{await fetch('/api/owner/logout',{method:'POST'});router.replace('/owner/login');router.refresh()}}>Sign out</button>}
